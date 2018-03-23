@@ -4,19 +4,36 @@
  * @flow
  */
 
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, View } from 'react-native';
+import firebase from 'firebase';
 import { Header } from './components/common';
+import LoginForm from './components/LoginForm';
 
-const App = () => (
-  <View style={styles.container}>
-    <Header screenTitle={'Auth Sample'} />
-    <View style={styles.description}>
-      <Text style={styles.welcome}>Welcome to React Native!</Text>
-      <Text style={styles.instructions}>To get started, edit App.js</Text>
-    </View>
-  </View>
-);
+class App extends Component {
+  //
+  componentWillMount() {
+    console.log('Inside componentWillMount');
+    firebase.initializeApp({
+      apiKey: 'AIzaSyD-FiSgTRt5Q2MQOP1ptR18NPfvNSkVuxw',
+      authDomain: 'authenticationsample-12df0.firebaseapp.com',
+      databaseURL: 'https://authenticationsample-12df0.firebaseio.com',
+      projectId: 'authenticationsample-12df0',
+      storageBucket: '',
+      messagingSenderId: '292788396203'
+    });
+  }
+
+  render() {
+    console.log('Inside render');
+    return (
+      <View style={styles.container}>
+        <Header screenTitle={'Firebase Authentication'} />
+        <LoginForm />
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
