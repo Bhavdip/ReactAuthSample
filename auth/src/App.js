@@ -7,10 +7,13 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import firebase from 'firebase';
-import { Header } from './components/common';
+import { Header, Button, Spinner } from './components/common';
 import LoginForm from './components/LoginForm';
 
 class App extends Component {
+  state = {
+    isLoggedIn: null
+  };
   //
   componentWillMount() {
     console.log('Inside componentWillMount');
@@ -22,6 +25,38 @@ class App extends Component {
       storageBucket: '',
       messagingSenderId: '292788396203'
     });
+
+    //On auth state changed
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.setState({ isLoggedIn: true });
+      } else {
+        this.setState({ isLoggedIn: true });
+      }
+    });
+  }
+
+  renderContent() {
+    switch (this.state.isLoggedIn) {
+      case true: {
+        return (
+          <Button
+            onClickListener={() => {
+              //firebase.auth().signOut();
+              this.setState({ isLoggedIn: false });
+            }}
+          >
+            Logout
+          </Button>
+        );
+      }
+      case false: {
+        return <LoginForm />;
+      }
+      default: {
+        return <Spinner />;
+      }
+    }
   }
 
   render() {
@@ -29,7 +64,7 @@ class App extends Component {
     return (
       <View style={styles.container}>
         <Header screenTitle={'Firebase Authentication'} />
-        <LoginForm />
+        {this.renderContent()}
       </View>
     );
   }
@@ -39,21 +74,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F5FCFF'
-  },
-  description: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5
   }
 });
 

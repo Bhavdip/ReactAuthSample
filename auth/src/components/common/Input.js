@@ -12,6 +12,7 @@ const Input = props => {
         onChangeText={props.onTextChangeListener}
         placeholder={props.hint}
         secureTextEntry={props.inputTypePassword}
+        value={props.value}
         autoCorrect={false}
       />
     </View>
