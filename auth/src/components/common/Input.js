@@ -8,11 +8,11 @@ const Input = props => {
     <View style={containerStyle}>
       <Text style={labelStyle}>{props.label}</Text>
       <TextInput
-        autoCorrect={false}
         style={inputStyle}
-        onChangeText={props.onTextChnageListener}
+        onChangeText={props.onTextChangeListener}
         placeholder={props.hint}
         secureTextEntry={props.inputTypePassword}
+        autoCorrect={false}
       />
     </View>
   );
