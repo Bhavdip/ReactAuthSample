@@ -1,18 +1,27 @@
 /* @flow weak */
 
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 
 const Button = props => {
-  const { buttonStyle, textStyle } = styles;
+  const { containerStyle, buttonStyle, textStyle } = styles;
   return (
-    <TouchableOpacity style={buttonStyle} onPress={props.onClickListener} disabled={props.disabled}>
-      <Text style={textStyle}>{props.children}</Text>
-    </TouchableOpacity>
+    <View style={containerStyle}>
+      <TouchableOpacity
+        style={buttonStyle}
+        onPress={props.onClickListener}
+        disabled={props.disabled}
+      >
+        <Text style={textStyle}>{props.children}</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
 const styles = {
+  containerStyle: {
+    flex: 1
+  },
   textStyle: {
     alignSelf: 'center',
     color: '#000',
@@ -21,7 +30,6 @@ const styles = {
     paddingBottom: 10
   },
   buttonStyle: {
-    alignSelf: 'stretch',
     backgroundColor: '#fff',
     borderRadius: 5,
     borderWidth: 1,

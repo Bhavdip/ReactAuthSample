@@ -31,7 +31,7 @@ class App extends Component {
       if (user) {
         this.setState({ isLoggedIn: true });
       } else {
-        this.setState({ isLoggedIn: true });
+        this.setState({ isLoggedIn: false });
       }
     });
   }
@@ -42,8 +42,7 @@ class App extends Component {
         return (
           <Button
             onClickListener={() => {
-              //firebase.auth().signOut();
-              this.setState({ isLoggedIn: false });
+              firebase.auth().signOut();
             }}
           >
             Logout

@@ -47,7 +47,11 @@ class LoginForm extends Component {
 
   renderButton() {
     if (this.state.isLoading) {
-      return <Spinner />;
+      return (
+        <CardSection>
+          <Spinner />
+        </CardSection>
+      );
     }
     if (this.state.email !== '' && this.state.password !== '') {
       return (
